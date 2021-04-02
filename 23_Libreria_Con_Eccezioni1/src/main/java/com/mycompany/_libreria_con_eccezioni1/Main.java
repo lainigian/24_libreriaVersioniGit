@@ -6,9 +6,8 @@
 package com.mycompany._libreria_con_eccezioni1;
 
 import eccezioni.*;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.*;
+
 
 /**
  *
@@ -21,7 +20,7 @@ public class Main
     {
           
         String[] vociMenu=new String[9];
-        int sceltaUtente=0;
+        int sceltaUtente=-1;
         Scanner tastiera=new Scanner(System.in);
         Scaffale s1=new Scaffale();
         Libro libro;
@@ -43,166 +42,177 @@ public class Main
         
         do
         {
-            sceltaUtente=menu.sceltaMenu();
-            switch(sceltaUtente)
+            try
             {
-                case 0:
+                sceltaUtente=menu.sceltaMenu();
+                switch(sceltaUtente)
                 {
-                    System.out.println("L'applicazione verrà terminata");
-                    break;
-                }
-                case 1:
-                {
-                    libro=new Libro();
-                    System.out.println("Titolo-->");
-                    libro.setTitolo(tastiera.nextLine());
-                    System.out.println("Autore-->");
-                    libro.setAutore(tastiera.nextLine());
-                    System.out.println("Numero pagine-->");
-                    libro.setNumeroPagine(tastiera.nextInt());
-                    System.out.println("Ripiano [0..4]-->");
-                    ripiano=tastiera.nextInt();
-                    System.out.println("Posizione [0..14]-->");
-                    posizione=tastiera.nextInt();
-                    try
+                    case 0:
                     {
-                        s1.setLibro(libro,ripiano ,posizione);
-                        System.out.println("Ok inserimento eseguito correttamente");
+                        System.out.println("L'applicazione verrà terminata");
+                        break;
                     }
-                    catch(EccezionePosizioneNonValida e1)
+                    case 1:
                     {
-                        System.out.println(e1.toString());
-                    }
-                    catch(EccezionePosizioneNonVuota e2)
-                    {
-                        System.out.println(e2.toString());
-                    }
-                    System.out.println("Premi un pulsante per continuare");
-                    tastiera.nextLine();
-                    break;
-                }
-                case 2:
-                {
-                    System.out.println("Ripiano [0..4]-->");
-                    ripiano=tastiera.nextInt();
-                    System.out.println("Posizione [0..14]-->");
-                    posizione=tastiera.nextInt();
-                    try
-                    {
-                        libro=s1.getLibro(ripiano, posizione);
-                        if (libro==null)
-                            System.out.println("Nessun libro presente in questa posizione");
-                        else
+                        libro=new Libro();
+                        System.out.println("Titolo-->");
+                        libro.setTitolo(tastiera.nextLine());
+                        System.out.println("Autore-->");
+                        libro.setAutore(tastiera.nextLine());
+                        System.out.println("Numero pagine-->");
+                        libro.setNumeroPagine(tastiera.nextInt());
+                        System.out.println("Ripiano [0..4]-->");
+                        ripiano=tastiera.nextInt();
+                        System.out.println("Posizione [0..14]-->");
+                        posizione=tastiera.nextInt();
+                        try
                         {
-                            System.out.println(libro.toString());
+                            s1.setLibro(libro,ripiano ,posizione);
+                            System.out.println("Ok inserimento eseguito correttamente");
+                        }
+                        catch(EccezionePosizioneNonValida e1)
+                        {
+                            System.out.println(e1.toString());
+                        }
+                        catch(EccezionePosizioneNonVuota e2)
+                        {
+                            System.out.println(e2.toString());
+                        }
+                        System.out.println("Premi un pulsante per continuare");
+                        tastiera.nextLine();
+                        break;
+                    }
+                    case 2:
+                    {
+                        System.out.println("Ripiano [0..4]-->");
+                        ripiano=tastiera.nextInt();
+                        System.out.println("Posizione [0..14]-->");
+                        posizione=tastiera.nextInt();
+                        try
+                        {
+                            libro=s1.getLibro(ripiano, posizione);
+                            if (libro==null)
+                                System.out.println("Nessun libro presente in questa posizione");
+                            else
+                            {
+                                System.out.println(libro.toString());
+                            }
+                        }
+                        catch (EccezionePosizioneNonValida e1)
+                        {
+                            System.out.println(e1.toString());
+                        }
+
+                        System.out.println("Premi un pulsante per continuare");
+                        tastiera.nextLine();
+                        break;
+                    }
+                    case 3:
+                    {
+                        System.out.println("Ripiano [0..4]-->");
+                        ripiano=tastiera.nextInt();
+                        System.out.println("Posizione [0..14]-->");
+                        posizione=tastiera.nextInt();
+
+                        try
+                        {
+                            s1.rimuoviLibro(ripiano, posizione);
+                            System.out.println("Ok rimozione effettuata correttamente");
+                        }
+                        catch(EccezionePosizioneNonValida e1)
+                        {
+                            System.out.println(e1.toString());
+                        } 
+                        catch (EccezionePosizioneVuota e2) 
+                        {
+                               System.out.println(e2.toString());
+                        }
+                        System.out.println("Premi un pulsante per continuare");
+                        tastiera.nextLine();
+                        break;
+                    }
+                    case 4:
+                    {
+                        String[] elencoTitoli;
+                        String autore;
+                        System.out.println("Autore-->");
+                        autore=tastiera.nextLine();
+                        try
+                        {
+                            elencoTitoli=s1.elencoTitoliAutore(autore);
+                            if (elencoTitoli==null)
+                            System.out.println("Nessun libro presente dell'autore "+autore);
+                            else
+                            {
+                                for (int i=0;i<elencoTitoli.length;i++)
+                                    System.out.println(elencoTitoli[i]);
+                            }
+                        }
+                        catch (EccezionePosizioneNonValida e1)
+                        {
+                            System.out.println(e1.toString());
+                        }
+                        System.out.println("Premi un pulsante per continuare");
+                        tastiera.nextLine();
+                        break;
+                    }
+                    case 5:
+                    {
+                        System.out.println(s1.toString());
+                        break;
+                    }
+                    case 6:
+                    {
+                        try
+                        {
+                            System.out.println(s1.elencoAlfabeticoLibri());
+                        }
+                        catch (EccezionePosizioneNonValida e1)
+                        {
+                            System.out.println(e1.toString());
+                        }
+                        break;
+                    }
+                    case 7:
+                    {
+                        Libro[] elencoLibri;
+                        try
+                        {
+                            elencoLibri=s1.elencoLibriOrdinatiPrezzo();
+                            for (int i=0;i<elencoLibri.length;i++)
+                                System.out.println(elencoLibri[i].toString()+ " € "+elencoLibri[i].prezzo());
+                        }
+                        catch (EccezionePosizioneNonValida e1)
+                        {
+                            System.out.println(e1.toString());
+                        }
+
+                    }
+                    case 8:
+                    {
+                        Libro[] elencoLibri;
+                        try
+                        {
+                            elencoLibri=s1.elencoLibriAlfabeticoAutoreTitolo();
+                            for (int i=0;i<elencoLibri.length;i++)
+                                System.out.println(elencoLibri[i].toString()+ " € "+elencoLibri[i].prezzo()); 
+                        }
+                        catch (EccezionePosizioneNonValida e1)
+                        {
+                            System.out.println(e1.toString());
                         }
                     }
-                    catch (EccezionePosizioneNonValida e1)
-                    {
-                        System.out.println(e1.toString());
-                    }
-                    
-                    System.out.println("Premi un pulsante per continuare");
-                    tastiera.nextLine();
-                    break;
-                }
-                case 3:
-                {
-                    System.out.println("Ripiano [0..4]-->");
-                    ripiano=tastiera.nextInt();
-                    System.out.println("Posizione [0..14]-->");
-                    posizione=tastiera.nextInt();
-                    
-                    try
-                    {
-                        s1.rimuoviLibro(ripiano, posizione);
-                        System.out.println("Ok rimozione effettuata correttamente");
-                    }
-                    catch(EccezionePosizioneNonValida e1)
-                    {
-                        System.out.println(e1.toString());
-                    } 
-                    catch (EccezionePosizioneVuota e2) 
-                    {
-                           System.out.println(e2.toString());
-                    }
-                    System.out.println("Premi un pulsante per continuare");
-                    tastiera.nextLine();
-                    break;
-                }
-                case 4:
-                {
-                    String[] elencoTitoli;
-                    String autore;
-                    System.out.println("Autore-->");
-                    autore=tastiera.nextLine();
-                    try
-                    {
-                        elencoTitoli=s1.elencoTitoliAutore(autore);
-                        if (elencoTitoli==null)
-                        System.out.println("Nessun libro presente dell'autore "+autore);
-                        else
-                        {
-                            for (int i=0;i<elencoTitoli.length;i++)
-                                System.out.println(elencoTitoli[i]);
-                        }
-                    }
-                    catch (EccezionePosizioneNonValida e1)
-                    {
-                        System.out.println(e1.toString());
-                    }
-                    System.out.println("Premi un pulsante per continuare");
-                    tastiera.nextLine();
-                    break;
-                }
-                case 5:
-                {
-                    System.out.println(s1.toString());
-                    break;
-                }
-                case 6:
-                {
-                    try
-                    {
-                        System.out.println(s1.elencoAlfabeticoLibri());
-                    }
-                    catch (EccezionePosizioneNonValida e1)
-                    {
-                        System.out.println(e1.toString());
-                    }
-                    break;
-                }
-                case 7:
-                {
-                    Libro[] elencoLibri;
-                    try
-                    {
-                        elencoLibri=s1.elencoLibriOrdinatiPrezzo();
-                        for (int i=0;i<elencoLibri.length;i++)
-                            System.out.println(elencoLibri[i].toString()+ " € "+elencoLibri[i].prezzo());
-                    }
-                    catch (EccezionePosizioneNonValida e1)
-                    {
-                        System.out.println(e1.toString());
-                    }
-                      
-                }
-                case 8:
-                {
-                    Libro[] elencoLibri;
-                    try
-                    {
-                        elencoLibri=s1.elencoLibriAlfabeticoAutoreTitolo();
-                        for (int i=0;i<elencoLibri.length;i++)
-                            System.out.println(elencoLibri[i].toString()+ " € "+elencoLibri[i].prezzo()); 
-                    }
-                    catch (EccezionePosizioneNonValida e1)
-                    {
-                        System.out.println(e1.toString());
-                    }
+
                 }
                 
             }
+            catch (InputMismatchException | NumberFormatException e1 )
+            {
+                tastiera.nextLine();
+                System.out.println("Input non corretto");
+            }
+            
+            
             
         }while (sceltaUtente!=0);
             

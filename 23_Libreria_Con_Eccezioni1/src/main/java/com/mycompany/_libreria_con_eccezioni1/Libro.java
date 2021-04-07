@@ -10,12 +10,13 @@ package com.mycompany._libreria_con_eccezioni1;
  * titolo
  * autore
  * numeroPagine
- * costoPagina: indica il costo di una singola pagina del libro
- * COSTO_FISSO: è una costante, indica la parte di costo fisso per la produzione di un libro
- * il prezzo finale di un libroi sarà dato dalla somma fra il COSTO_FISSO  e numero di pagine moltiplicato per il costoPagina
+ * costoPagina(indica il costo di una singola pagina del libro)
+ * COSTO_FISSO (è una costante, indica la parte di costo fisso per la produzione di un libro).
+ * Il prezzo finale di un libro sarà dato dalla somma fra il COSTO_FISSO  e numero di pagine moltiplicato per il costoPagina
  * @author Laini Gian Marco
  * @version 1.0
  */
+
 
 public class Libro 
 {
@@ -32,6 +33,13 @@ public class Libro
  * @param autore:autore del libro
  * @param numeroPagine: numero di pagine di cui è composto il libro   
 */
+    
+ /**
+  * @
+  * @param titolo
+  * @param autore
+  * @param numeroPagine 
+  */   
     public Libro(String titolo,String autore,int numeroPagine)
     {
         this.titolo=titolo;

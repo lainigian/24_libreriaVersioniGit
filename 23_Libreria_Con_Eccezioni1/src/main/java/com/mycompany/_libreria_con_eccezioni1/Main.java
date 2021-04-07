@@ -6,6 +6,7 @@
 package com.mycompany._libreria_con_eccezioni1;
 
 import eccezioni.*;
+import java.io.IOException;
 import java.util.*;
 
 
@@ -19,13 +20,16 @@ public class Main
     public static void main(String[] args) 
     {
           
-        String[] vociMenu=new String[9];
+        String[] vociMenu=new String[10];
         int sceltaUtente=-1;
         Scanner tastiera=new Scanner(System.in);
         Scaffale s1=new Scaffale();
         Libro libro;
         int esitoOperazione,ripiano,posizione;
+        String caricamentoDaFileOK;
+        String nomeFile="libriScaffale.txt";
         
+
         vociMenu[0]="Esci";
         vociMenu[1]="Aggiungi libro";
         vociMenu[2]="Visualizza libro";
@@ -35,8 +39,26 @@ public class Main
         vociMenu[6]="Visualizza elenco alfabetico libri";
         vociMenu[7]="Visualizza elenco libri ordinati per prezzo";
         vociMenu[8]="Visualizza elenco libri per autore in ordine alfabetico";
+        vociMenu[9]="Salva libri su file";
     
-        
+        //carico i libri dal file
+        try
+        {
+            caricamentoDaFileOK=s1.caricaLibri(nomeFile);
+            System.out.println("..."+caricamentoDaFileOK);
+            System.out.println("Caricamento efettuato correttamente.\nPremi un pulsante per continuare");
+            tastiera.nextLine();
+            
+        }
+        catch(IOException e1)
+        {
+            System.out.println("Impossibile accedere al file in lettura");
+        }
+        catch(EccezionePosizioneNonValida | EccezionePosizioneNonVuota e2)
+        {
+            System.out.println(e2.toString());
+        }
+                
         
         Menu menu= new Menu(vociMenu);
         
@@ -186,6 +208,7 @@ public class Main
                         {
                             System.out.println(e1.toString());
                         }
+                        break;
 
                     }
                     case 8:
@@ -201,6 +224,28 @@ public class Main
                         {
                             System.out.println(e1.toString());
                         }
+                        break;
+                    }
+                    case 9:
+                    {
+                        try
+                        {
+                            s1.salvaLibri(nomeFile);
+                            System.out.println("Salvataggio avvenuto correttamente");
+                        }
+                        catch(IOException e1)
+                        {
+                            System.out.println("Impossibile accedere al file");
+                        }
+                        catch(FileException e2)
+                        {
+                            System.out.println(e2.toString());
+                        }
+                        catch(EccezionePosizioneNonValida e3)
+                        {
+                            System.out.println(e3.toString());
+                        }
+                        break;
                     }
 
                 }

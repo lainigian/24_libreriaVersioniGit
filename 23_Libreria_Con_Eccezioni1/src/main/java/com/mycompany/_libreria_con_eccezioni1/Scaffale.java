@@ -6,6 +6,8 @@
 package com.mycompany._libreria_con_eccezioni1;
 
 import eccezioni.*;
+import file.TextFile;
+import java.io.IOException;
 
 /**
  *
@@ -348,7 +350,62 @@ se ok  return 0
       return elencoLibri;  
   }
   
+  //Salva i libri e le posizioni su file CSV
+  public void salvaLibri(String filePathName) throws IOException, EccezionePosizioneNonValida, FileException
+  {
+      Libro libro;
+      String stringaLibro;
+      TextFile f1= new TextFile(filePathName, 'W');
+      for (int i=0;i<getNumRipiani();i++)
+      {
+          for (int j=0;j<ripiani[i].getNumMaxVolumi();j++)
+          {
+              libro=getLibro(i,j);
+              if (libro!=null)
+              {
+                  stringaLibro=i+";"+j+";"+libro.getTitolo()+";"+libro.getAutore()+";"+libro.getNumeroPagine()+";";
+                  f1.toFile(stringaLibro);
+              }
+          }
+      }
+      f1.close(); 
+  }
   
+  //Legge i libri, con relative posizioni, da un file CSV e li posiziona nello scaffale
+  public String caricaLibri(String filePathName) throws IOException, EccezionePosizioneNonValida, EccezionePosizioneNonVuota
+  {
+    Libro libro;
+    String stringaLibro;
+    String[] elementi;
+    int ripiano,posizione;
+    String titolo,autore;
+    int numeroPagine;
+    String stringaDiRitorno;
+    TextFile f1=new TextFile(filePathName, 'R');
+    
+    try
+    {
+        while(true)
+        {
+            stringaLibro=f1.fromFile();
+            elementi=stringaLibro.split(";"); //metto, a uno a uno, gli elementi della stringa CSV che rappresenta un libro ( e la posizione) nell'array di stringhe
+            ripiano=Integer.parseInt(elementi[0]);
+            posizione=Integer.parseInt(elementi[1]);
+            titolo=elementi[2];
+            autore=elementi[3];
+            numeroPagine=Integer.parseInt(elementi[4]);
+            libro=new Libro(titolo, autore, numeroPagine);
+            setLibro(libro, ripiano, posizione);
+        }
+    }
+    catch(FileException fineFile)
+    {
+        stringaDiRitorno=fineFile.toString();  // "fine del file"
+        f1.close();
+    }
+     
+    return stringaDiRitorno;
+  }
   
   
   

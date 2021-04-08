@@ -10,7 +10,14 @@ import file.TextFile;
 import java.io.IOException;
 
 /**
- *
+ * La classe scffale rapppresenta uno Scaffale di una libreria.
+ * Uno scaffale è costituito da NUM_RIPIANI ripiani. Ogni ripiano 
+ * è un oggetto di tipo Mensola. Ogni oggetto di tipo Mensolam è un
+ * aggregazione di oggetti di tipo Libro.
+ * QUesta classe consent i svolgere operazioni di ricerca, inserimento, eliminazione
+ * dei libri nello Scaffale.
+ * Gli attributi sono<br> ripiani (array di mensole)
+ * 
  * @author User
  */
 public class Scaffale 

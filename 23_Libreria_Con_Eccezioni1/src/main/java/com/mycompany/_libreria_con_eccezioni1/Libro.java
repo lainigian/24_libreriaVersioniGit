@@ -5,17 +5,19 @@
  */
 package com.mycompany._libreria_con_eccezioni1;
 
+
 /**
  * La classe Libro rappresenta un libro. I suoi attributi sono:
- * titolo
- * autore
- * numeroPagine
- * costoPagina(attributo statico che indica il costo di una singola pagina del libro)
- * COSTO_FISSO (è una costante, indica la parte di costo fisso per la produzione di un libro).
+ * titolo <br>
+ * autore <br>
+ * numeroPagine <br>
+ * costoPagina (attributo statico che indica il costo di una singola pagina del libro) <br>
+ * COSTO_FISSO (è una costante, indica la parte di costo fisso per la produzione di un libro). <br>
  * Il prezzo finale di un libro sarà dato dalla somma fra il COSTO_FISSO  e numero di pagine moltiplicato per il costoPagina
  * @author Laini Gian Marco
  * @version 1.0
  */
+
 
 
 public class Libro 

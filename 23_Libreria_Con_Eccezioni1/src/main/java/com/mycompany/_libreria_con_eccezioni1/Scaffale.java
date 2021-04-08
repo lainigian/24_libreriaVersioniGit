@@ -381,14 +381,14 @@ se ok  return 0
     String titolo,autore;
     int numeroPagine;
     String stringaDiRitorno;
-    TextFile f1=new TextFile(filePathName, 'R');
-    
+    TextFile f1=new TextFile(filePathName, 'R');  
     try
     {
         while(true)
         {
             stringaLibro=f1.fromFile();
-            elementi=stringaLibro.split(";"); //metto, a uno a uno, gli elementi della stringa CSV che rappresenta un libro ( e la posizione) nell'array di stringhe
+            //metto, a uno a uno, gli elementi della stringa CSV che rappresenta un libro ( e la posizione) nell'array di stringhe
+            elementi=stringaLibro.split(";"); 
             ripiano=Integer.parseInt(elementi[0]);
             posizione=Integer.parseInt(elementi[1]);
             titolo=elementi[2];
@@ -402,8 +402,7 @@ se ok  return 0
     {
         stringaDiRitorno=fineFile.toString();  // "fine del file"
         f1.close();
-    }
-     
+    }  
     return stringaDiRitorno;
   }
   

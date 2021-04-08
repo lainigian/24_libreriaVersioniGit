@@ -6,11 +6,11 @@
 package com.mycompany._libreria_con_eccezioni1;
 
 /**
- *La classe Libro rappresenta un libro. I suoi attributi sono:
+ * La classe Libro rappresenta un libro. I suoi attributi sono:
  * titolo
  * autore
  * numeroPagine
- * costoPagina(indica il costo di una singola pagina del libro)
+ * costoPagina(attributo statico che indica il costo di una singola pagina del libro)
  * COSTO_FISSO (è una costante, indica la parte di costo fisso per la produzione di un libro).
  * Il prezzo finale di un libro sarà dato dalla somma fra il COSTO_FISSO  e numero di pagine moltiplicato per il costoPagina
  * @author Laini Gian Marco
@@ -29,16 +29,15 @@ public class Libro
   
 /**
  * Costruttore della classe Libro. Consente di istanziare un nuovo libro
- * @param titolo:titolo del libro
- * @param autore:autore del libro
- * @param numeroPagine: numero di pagine di cui è composto il libro   
+ * @param titolo titolo del libro
+ * @param autore autore del libro
+ * @param numeroPagine  numero di pagine di cui è composto il libro   
 */
     
  /**
-  * @
-  * @param titolo
-  * @param autore
-  * @param numeroPagine 
+  * @param titolo titolo del libro
+  * @param autore autore del libro
+  * @param numeroPagine numero di pagine di cui è composto il libro
   */   
     public Libro(String titolo,String autore,int numeroPagine)
     {
@@ -83,7 +82,7 @@ public class Libro
     
     /**
      * Assegna il titolo al libro
-     * @param titolo 
+     * @param titolo titolo del libro
      */
     public void setTitolo(String titolo)
     {
@@ -101,7 +100,7 @@ public class Libro
     
     /**
      * Assegna l'autore al libro
-     * @param autore 
+     * @param autore autore del libro
      */
     public void setAutore(String autore)
     {
@@ -119,7 +118,7 @@ public class Libro
     
     /**
      * Assegna il numero di pagine di cui è costituito il libro
-     * @param numeroPagine 
+     * @param numeroPagine numero di pagine di cui è composto il libro
      */
     public void setNumeroPagine(int numeroPagine)
     {
@@ -128,7 +127,7 @@ public class Libro
     
     /**
      * Calcola e restituisce il prezzo di vendita del libro
-     * @return prezzo
+     * @return p prezzo di vendita del libro
      */
     public double prezzo()
     {
@@ -139,9 +138,9 @@ public class Libro
     
     /**
      * Metodo statico
-     * Assegna il costo unitario per realizzare ciascuna pagina del libro
+     * Assegna il costo unitario di vendita per ciascuna pagina del libro
      * 
-     * @param costo 
+     * @param costo costo di vendita di ogni singola pagina del libro
      */
     public static void setCostoPagina(double costo)
     {

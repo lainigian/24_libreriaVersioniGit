@@ -7,13 +7,16 @@ package com.mycompany._libreria_con_eccezioni1;
 
 
 /**
- * La classe Libro rappresenta un libro. I suoi attributi sono:
+ * La classe rappresenta un libro.
+ * I suoi suoi attributi sono:<br>
  * titolo <br>
  * autore <br>
  * numeroPagine <br>
- * costoPagina (attributo statico che indica il costo di una singola pagina del libro) <br>
- * COSTO_FISSO (è una costante, indica la parte di costo fisso per la produzione di un libro). <br>
- * Il prezzo finale di un libro sarà dato dalla somma fra il COSTO_FISSO  e numero di pagine moltiplicato per il costoPagina
+ * costoPagina: attributo statico, rappresenta il costo per la produzione di una singola pagina
+ * del libro.
+ * COSTO_FISSO: è una costante, rappresenta il costo di base per la produzione di un libro
+ * Il prezzo finale di un libro verrà calcolato come somma fra COSTO_FISSO   e il prodotto
+ * del numero di pagine per il costo di una pagina.
  * @author Laini Gian Marco
  * @version 1.0
  */
@@ -29,18 +32,13 @@ public class Libro
     private static double costoPagina=0.05;
     private final double COSTO_FISSO=5.5;
   
-/**
- * Costruttore della classe Libro. Consente di istanziare un nuovo libro
- * @param titolo titolo del libro
- * @param autore autore del libro
- * @param numeroPagine  numero di pagine di cui è composto il libro   
-*/
     
- /**
-  * @param titolo titolo del libro
-  * @param autore autore del libro
-  * @param numeroPagine numero di pagine di cui è composto il libro
-  */   
+/**
+ * Costruttore della classe Libro
+ * @param titolo titolo del libro
+ * @param autore autore del libro   
+ * @param numeroPagine nuimero di pagine di cui è costituito il libro
+ */
     public Libro(String titolo,String autore,int numeroPagine)
     {
         this.titolo=titolo;
@@ -50,7 +48,8 @@ public class Libro
     
   /**
    * Costruttore di copia della classe Libro. Consente di istanziare un nuovo libro
-   * @param l: libro da cui verrà istanziato il nuovo libro. Il libro istanziato sarà una copia del libro l
+   * @param l: libro da cui verrà istanziato il nuovo libro. 
+   * Il libro istanziato sarà una copia del libro l
    */
     public Libro(Libro l)
     {
@@ -60,10 +59,11 @@ public class Libro
     }
     
     /**
-     * Costruttore di default della classe Libro. Consente di istanziare un nuovo libro con i seguenti 
-     * valori di default per gli attributi
-     * titolo: stringa vuota
-     * autore: stringa vuota 
+     * Costruttore di default della classe Libro. 
+     * Consente di istanziare un nuovo libro con i seguenti 
+     * valori di default per gli attributi<br>
+     * titolo: stringa vuota<br>
+     * autore: stringa vuota<br>
      * numeroPagine=0
     */
     public Libro()

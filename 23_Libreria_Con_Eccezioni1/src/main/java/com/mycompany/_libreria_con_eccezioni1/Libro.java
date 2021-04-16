@@ -75,7 +75,7 @@ public class Libro
     
     /**
      * Restituisce il titolo del libro
-     * @return titolo
+     * @return titolo del libro
      */
     public String getTitolo()
     {

@@ -10,20 +10,28 @@ import file.TextFile;
 import java.io.IOException;
 
 /**
- * La classe scffale rapppresenta uno Scaffale di una libreria.
+ * La classe scaffale rapppresenta uno Scaffale di una libreria.
  * Uno scaffale è costituito da NUM_RIPIANI ripiani. Ogni ripiano 
- * è un oggetto di tipo Mensola. Ogni oggetto di tipo Mensolam è un
+ * è un oggetto di tipo Mensola. Ogni oggetto di tipo Mensola è un
  * aggregazione di oggetti di tipo Libro.
- * QUesta classe consent i svolgere operazioni di ricerca, inserimento, eliminazione
+ * Questa classe consente di svolgere operazioni di ricerca, inserimento, eliminazione
  * dei libri nello Scaffale.
- * Gli attributi sono<br> ripiani (array di mensole)
+ * Gli attributi sono<br> 
+ * ripiani: array di mensole <br>
+ * NUM_RIPIANI: costante che indica il numero di ripiani presenti
  * 
- * @author User
+ * @author Laini Gian Marco
  */
 public class Scaffale 
 {
    private Mensola[] ripiani;
    private static final int NUM_RIPIANI=5;
+   
+   /**
+    * Costruttore della classe Scaffale
+    * Cinsente di istanziare un nuovo Scaffale
+    * costituito da NUM_RIPIANI ripiani vuoti
+    */
    
    public Scaffale()
    {
@@ -36,6 +44,12 @@ public class Scaffale
        
    }
    
+   /**
+    * Costruttore di copia. Consente di istanziare un nuovo Scaffale
+    * copia dello scaffale passato come parametro
+    * @param s Lo Scaffale di cui creare la copia
+    * 
+    */
    public Scaffale(Scaffale s) throws EccezionePosizioneNonValida, EccezionePosizioneNonVuota
    {
         ripiani=new Mensola[NUM_RIPIANI];
@@ -56,6 +70,11 @@ public class Scaffale
         
    }
    
+   /**
+    * Restituisce un ripiano dello scaffale
+    * @param ripiano Il numero che identifica il ripiano da restituire all'interno dello Scaffale
+    * @return il ripiano, istanza della classe mensola, da restituire
+    */
    public Mensola getRipiano(int ripiano) throws EccezionePosizioneNonValida
    {
        Mensola m;

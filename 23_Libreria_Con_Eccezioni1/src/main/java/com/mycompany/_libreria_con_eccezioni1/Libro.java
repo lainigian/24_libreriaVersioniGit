@@ -5,6 +5,8 @@
  */
 package com.mycompany._libreria_con_eccezioni1;
 
+import java.io.Serializable;
+
 
 /**
  * La classe rappresenta un libro.
@@ -23,7 +25,7 @@ package com.mycompany._libreria_con_eccezioni1;
 
 
 
-public class Libro 
+public class Libro implements Serializable
 {
   //attibuti
     private String titolo;
@@ -170,5 +172,15 @@ public class Libro
         return s;
     }
     
+    public boolean equals(Object o)
+    {
+        Libro l=(Libro)o;
+        if (getTitolo().compareToIgnoreCase(l.getTitolo())==0 && getAutore().compareToIgnoreCase(l.getAutore())==0 && getNumeroPagine()==l.getNumeroPagine())
+            return true;
+        else
+            return false;
+              
+            
+    }
 }
  

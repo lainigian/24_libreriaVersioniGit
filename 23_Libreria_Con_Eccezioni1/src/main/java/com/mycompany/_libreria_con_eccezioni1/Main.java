@@ -8,6 +8,8 @@ package com.mycompany._libreria_con_eccezioni1;
 import eccezioni.*;
 import java.io.IOException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -20,14 +22,15 @@ public class Main
     public static void main(String[] args) 
     {
           
-        String[] vociMenu=new String[10];
+        String[] vociMenu=new String[11];
         int sceltaUtente=-1;
         Scanner tastiera=new Scanner(System.in);
         Scaffale s1=new Scaffale();
         Libro libro;
         int esitoOperazione,ripiano,posizione;
         String caricamentoDaFileOK;
-        String nomeFile="libriScaffale.txt";
+        String nomeFileTesto="libriScaffale.txt";
+        String nomeFileBinario="scaffale.bin";
         
 
         vociMenu[0]="Esci";
@@ -39,26 +42,24 @@ public class Main
         vociMenu[6]="Visualizza elenco alfabetico libri";
         vociMenu[7]="Visualizza elenco libri ordinati per prezzo";
         vociMenu[8]="Visualizza elenco libri per autore in ordine alfabetico";
-        vociMenu[9]="Salva libri su file";
+        vociMenu[9]="Esporta libri su file CSV";
+        vociMenu[10]="Salva dati";
     
-        //carico i libri dal file
-        try
+          
+        
+        try 
         {
-            caricamentoDaFileOK=s1.caricaLibri(nomeFile);
-            System.out.println("..."+caricamentoDaFileOK);
-            System.out.println("Caricamento efettuato correttamente.\nPremi un pulsante per continuare");
-            tastiera.nextLine();
-            
-        }
-        catch(IOException e1)
+            s1=s1.caricaScaffale(nomeFileBinario);
+            System.out.println("Dati caricati correttamente");
+        } 
+        catch (IOException ex) 
         {
-            System.out.println("Impossibile accedere al file in lettura");
-        }
-        catch(EccezionePosizioneNonValida | EccezionePosizioneNonVuota e2)
+            System.out.println("Impossibile accedere al file in lettura. I dati non sono stati caricati");
+        } 
+        catch (FileException ex) 
         {
-            System.out.println(e2.toString());
+            System.out.println(ex.toString());
         }
-                
         
         Menu menu= new Menu(vociMenu);
         
@@ -230,8 +231,8 @@ public class Main
                     {
                         try
                         {
-                            s1.salvaLibri(nomeFile);
-                            System.out.println("Salvataggio avvenuto correttamente");
+                            s1.esportaLibriCSV(nomeFileTesto);
+                            System.out.println("Libri esportati correttamente");
                         }
                         catch(IOException e1)
                         {
@@ -247,6 +248,18 @@ public class Main
                         }
                         break;
                     }
+                    case 10:
+                    {
+                        try 
+                        {
+                            s1.salvaScaffale(nomeFileBinario);
+                            System.out.println("Dati salvati correttamente");
+                        } catch (IOException ex) 
+                        {
+                            System.out.println("Impossibile accedere al file in scrittura");
+                        }
+
+                     }
 
                 }
                 
@@ -506,7 +519,6 @@ public class Main
     
     
 }
-
 
 
 

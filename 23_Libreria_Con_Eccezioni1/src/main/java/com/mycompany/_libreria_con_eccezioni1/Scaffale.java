@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -7,7 +8,16 @@ package com.mycompany._libreria_con_eccezioni1;
 
 import eccezioni.*;
 import file.TextFile;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * La classe scaffale rapppresenta uno Scaffale di una libreria.
@@ -22,7 +32,7 @@ import java.io.IOException;
  * 
  * @author Laini Gian Marco
  */
-public class Scaffale 
+public class Scaffale implements Serializable
 {
    private Mensola[] ripiani;
    private static final int NUM_RIPIANI=5;
@@ -377,7 +387,7 @@ se ok  return 0
   }
   
   //Salva i libri e le posizioni su file CSV
-  public void salvaLibri(String filePathName) throws IOException, EccezionePosizioneNonValida, FileException
+  public void esportaLibriCSV(String filePathName) throws IOException, EccezionePosizioneNonValida, FileException
   {
       Libro libro;
       String stringaLibro;
@@ -397,7 +407,35 @@ se ok  return 0
       f1.close(); 
   }
   
-  //Legge i libri, con relative posizioni, da un file CSV e li posiziona nello scaffale
+  public void salvaScaffale(String nomeFile) throws IOException
+  {   
+      FileOutputStream f1=new FileOutputStream(nomeFile);
+      ObjectOutputStream writer=new ObjectOutputStream(f1);
+      writer.writeObject(this);
+      writer.flush();
+      writer.close();   
+  }
+  
+  public Scaffale caricaScaffale(String nomeFile) throws IOException, FileException
+  {
+      Scaffale s;
+      FileInputStream f1=new FileInputStream(nomeFile);
+      ObjectInputStream reader=new ObjectInputStream(f1);
+      
+       try 
+       {
+           s=(Scaffale)reader.readObject();
+           reader.close();
+           return s;
+       } 
+       catch (ClassNotFoundException ex) 
+       {
+           reader.close();
+           throw new FileException("Errore di lettura");
+       }   
+  }
+  
+ /* //Legge i libri, con relative posizioni, da un file CSV e li posiziona nello scaffale
   public String caricaLibri(String filePathName) throws IOException, EccezionePosizioneNonValida, EccezionePosizioneNonVuota
   {
     Libro libro;
@@ -432,7 +470,7 @@ se ok  return 0
     return stringaDiRitorno;
   }
   
-  
+  */
   
   
   
@@ -533,3 +571,4 @@ se ok  return 0
   
 */
 }
+

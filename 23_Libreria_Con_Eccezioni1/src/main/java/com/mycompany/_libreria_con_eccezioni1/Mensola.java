@@ -5,11 +5,13 @@
  */
 package com.mycompany._libreria_con_eccezioni1;
 
+import java.io.Serializable;
+
 /**
  *
  * @author User
  */
-public class Mensola 
+public class Mensola implements Serializable
 {
     //atributi
     private Libro[] volumi;
